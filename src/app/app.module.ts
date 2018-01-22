@@ -3,28 +3,28 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
+import { ToursComponent } from './tours/tours.component';
 import { FormsModule } from '@angular/forms';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { ExhibitComponent } from './exhibit/exhibit.component';
 import { MessagesComponent } from './messages/messages.component';
 
 import { MessageService } from './message.service';
-import { HeroService } from './hero.service';
+import { TourService } from './tour.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { TourSearchComponent } from './tour-search/tour-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroesComponent,
-    HeroDetailComponent,
+    ToursComponent,
+    ExhibitComponent,
     MessagesComponent,
     DashboardComponent,
-    HeroSearchComponent
+    TourSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +39,7 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [ HeroService, MessageService ],
+  providers: [ TourService, MessageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
