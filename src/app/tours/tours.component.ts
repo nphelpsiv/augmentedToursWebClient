@@ -12,15 +12,11 @@ import { TourService } from '../tour.service';
   styleUrls: ['./tours.component.css']
 })
 export class ToursComponent implements OnInit {
-  // tour: Tour = {
-  //   id: 1,
-  //   name: 'Windstorm'
-  // }
   tours: Tour[]
 
   constructor(private tourService: TourService) { }
 
-  selectedHero: Tour;
+  selectedTour: Tour;
   
   // onSelect(tour: Tour): void {
   //   this.selectedHero = tour;

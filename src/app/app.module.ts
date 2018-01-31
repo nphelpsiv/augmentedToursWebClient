@@ -16,6 +16,8 @@ import { HttpClientModule } from  '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 import { TourSearchComponent } from './tour-search/tour-search.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { ExhibitEditComponent } from './exhibit-edit/exhibit-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { TourSearchComponent } from './tour-search/tour-search.component';
     ExhibitComponent,
     MessagesComponent,
     DashboardComponent,
-    TourSearchComponent
+    TourSearchComponent,
+    UserLoginComponent,
+    ExhibitEditComponent
   ],
   imports: [
     BrowserModule,

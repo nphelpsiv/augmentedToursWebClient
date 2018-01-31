@@ -11,6 +11,16 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 6, name: 'The Best Tour' },
       { id: 7, name: 'Aquarium' }
     ];
-    return {tours};
+    const exhibits = [
+      { id: 1, name: 'Neals exhibit' },
+      { id: 2, name: 'Bens exhibit' },
+      { id: 3, name: 'Chris exhibit' },
+      { id: 4, name: 'Taylors exhibit' },
+      { id: 5, name: 'Jims exhibit' },
+      { id: 6, name: 'The Best exhibit' },
+      { id: 7, name: 'Aquarium' }
+    ];
+    return {tours, exhibits};
   }
+
 }

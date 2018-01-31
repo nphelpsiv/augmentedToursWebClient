@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of'
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Exhibit } from './exhibit/exhibit';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,6 +33,13 @@ export class TourService {
         catchError(this.handleError('getTours', []))
       );
   }
+  getExhibits (): Observable<Exhibit[]> {
+    return this.http.get<Exhibit[]>(this.exhibitsUrl)
+      .pipe(
+        tap(exhibits => this.log(`fetched exhibit`)),
+        catchError(this.handleError('getExhibit', []))
+      );
+  }
   /** GET tour by id. Will 404 if id not found */
   getTour(id: number): Observable<Tour> {
     const url = `${this.toursUrl}/${id}`;
@@ -41,6 +49,13 @@ export class TourService {
     );
   }
 
+  getExhibit(id: number): Observable<Exhibit> {
+    const url = `${this.exhibitsUrl}/${id}`;
+    return this.http.get<Exhibit>(url).pipe(
+      tap(_ => this.log(`fetched exhibit id=${id}`)),
+      catchError(this.handleError<Exhibit>(`getExhibit id=${id}`))
+    );
+  }
     /** PUT: update the tour on the server */
   updateTour (tour: Tour): Observable<any> {
     return this.http.put(this.toursUrl, tour, httpOptions).pipe(
@@ -65,6 +80,16 @@ export class TourService {
       catchError(this.handleError<Tour>('deleteTour'))
     );
   }
+  /** DELETE: delete the exhibit from the server */
+  deleteExhibit (exhibit: Exhibit | number): Observable<Exhibit> {
+    const id = typeof exhibit === 'number' ? exhibit : exhibit.id;
+    const url = `${this.exhibitsUrl}/${id}`;
+
+    return this.http.delete<Exhibit>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted exhibit id=${id}`)),
+      catchError(this.handleError<Exhibit>('deleteExhibit'))
+    );
+  }
   /* GET tours whose name contains search term */
   searchTours(term: string): Observable<Tour[]> {
     if (!term.trim()) {
@@ -87,7 +112,7 @@ export class TourService {
   }
 
   private toursUrl = 'api/tours';  // URL to web api
-
+  private exhibitsUrl = 'api/exhibits';
   /**
  * Handle Http operation that failed.
  * Let the app continue.

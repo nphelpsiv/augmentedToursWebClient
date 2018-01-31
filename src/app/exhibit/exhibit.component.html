@@ -1,14 +1,19 @@
+
 <div *ngIf="tour">
   
-    <h2>{{ tour.name | uppercase }} Details</h2>
-    <div><span>id: </span>{{tour.id}}</div>
-    <div>
-      <label>name:
-        <input [(ngModel)]="tour.name" placeholder="name"/>
-      </label>
-    </div>
-  
+    <h2>{{ tour.name | uppercase }} Exhibit</h2>
+
 </div>
 
-<button (click)="save()">save</button>
-<button (click)="goBack()">go back</button>
+<ul class="exhibits">
+  <li *ngFor="let exhibit of exhibits">
+    <a routerLink="/detail/{{exhibit.id}}">
+      <span class="badge">{{exhibit.id}}</span> {{exhibit.name}}
+    </a>
+    <button class="delete" title="delete exhibit"
+    (click)="delete(exhibit)">x</button>
+  </li>
+</ul>
+
+
+
