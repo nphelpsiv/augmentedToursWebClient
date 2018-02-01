@@ -16,7 +16,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Pushing to gh-pages
 
-Run `ng build -prod && ./deploy.sh`
+Run `npm run deploy`
 
 ## Running unit tests
 
