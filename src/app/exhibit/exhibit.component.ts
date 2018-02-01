@@ -23,15 +23,25 @@ export class ExhibitComponent implements OnInit {
   selectedExhibit: Exhibit;
 
   ngOnInit(): void {
-    this.getExhibits();
+    this.getTourExhibits();
   }
-  getExhibits(): void {
-    this.tourService.getExhibits().subscribe(exhibits => this.exhibits = exhibits);
+  onSelect(exhibit: Exhibit): void {
+    this.selectedExhibit = exhibit;
+  }
+  getTourExhibits(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.tourService.log(`Current exhibits = ${this.exhibits}` + `Before call tour = ${this.tour}`)
+    
+    this.tourService.getTour(id).subscribe(tour => {this.exhibits = tour.exhibits;}, error => console.log(`Couldnt load exhibits`));
+
+    this.tourService.log(`After call exhibits = ${this.exhibits}` + `After call tour = ${this.tour}`)
   }
 
+
   // getExhibits(): void {
+  //   //this.tour.getExhibits()
   //   const id = +this.route.snapshot.paramMap.get('id');
-  //   this.tourService.getExhibit(id).subscribe(tour => this.tour = tour);
+  //   this.tourService.getTour(id).subscribe(tour => this.tour = tour);
   // }
 
   goBack(): void {

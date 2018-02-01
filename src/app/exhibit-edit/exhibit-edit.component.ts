@@ -18,13 +18,13 @@ export class ExhibitEditComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit() {
-    this.getExhibits();
+    //this.getExhibits();
   }
 
-  getExhibits(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.tourService.getExhibit(id).subscribe(exhibit => this.exhibit = exhibit);
-  }
+  // getExhibits(): void {
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   this.tourService.getExhibit(id).subscribe(exhibit => this.exhibit = exhibit);
+  // }
   goBack(): void {
     this.location.back();
   }

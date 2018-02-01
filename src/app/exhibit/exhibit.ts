@@ -4,4 +4,11 @@ export class Exhibit {
     _text: string;
     id: number;
 
+    constructor(text: string, image: number, name: string, id: number)
+    {
+        this._image = image;
+        this._name = name;
+        this._text = text;
+        this.id = id;
+    }
 }

@@ -1,19 +1,16 @@
-
-<div *ngIf="tour">
-  
-    <h2>{{ tour.name | uppercase }} Exhibit</h2>
-
+<div *ngIf="exhibits">
+  <ul class="exhibit">
+    <li *ngFor="let exhibit of exhibits"
+    [class.selected]="exhibit === selectedExhibit"
+    (click)="onSelect(exhibit)">
+      <h2>{{ exhibits._name | uppercase }}</h2>
+      <a routerLink="/detail/{{exhibit.id}}">
+        <span class="badge">{{exhibit.id}}</span> {{exhibit._name}}
+      </a>
+      <button class="delete" title="delete exhibit"
+      (click)="delete(exhibit)">x</button>
+    </li>
+  </ul>
 </div>
-
-<ul class="exhibits">
-  <li *ngFor="let exhibit of exhibits">
-    <a routerLink="/detail/{{exhibit.id}}">
-      <span class="badge">{{exhibit.id}}</span> {{exhibit.name}}
-    </a>
-    <button class="delete" title="delete exhibit"
-    (click)="delete(exhibit)">x</button>
-  </li>
-</ul>
-
 
 <app-exhibit-edit [exhibit]="selectedExhibit"></app-exhibit-edit>

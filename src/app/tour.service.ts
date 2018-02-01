@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Tour } from './tours/tour';
-import { TOURS } from './mock-tours';
+//import { TOURS } from './mock-tours';
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
 import { MessageService } from './message.service';
@@ -26,7 +26,7 @@ export class TourService {
   //   //return of (TOURS);
   // }
   /** GET tours from the server */
-  getTours (): Observable<Tour[]> {
+  getTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(this.toursUrl)
       .pipe(
         tap(tours => this.log(`fetched tours`)),
@@ -107,7 +107,7 @@ export class TourService {
   //   return of(TOURS.find(tour => tour.id === id));
   // }
   /** Log a TourService message with the MessageService */
-  private log(message: string) {
+  public log(message: string) {
     this.messageService.add('TourService: ' + message);
   }
 
