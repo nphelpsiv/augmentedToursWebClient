@@ -1,9 +1,10 @@
+<h2>{{ tour.name | uppercase }}'s exhibits</h2>
+
 <div *ngIf="exhibits">
-  <ul class="exhibit">
+  <ul class="exhibits">
     <li *ngFor="let exhibit of exhibits"
     [class.selected]="exhibit === selectedExhibit"
     (click)="onSelect(exhibit)">
-      <h2>{{ exhibits._name | uppercase }}</h2>
       <a routerLink="/detail/{{exhibit.id}}">
         <span class="badge">{{exhibit.id}}</span> {{exhibit._name}}
       </a>
@@ -14,3 +15,6 @@
 </div>
 
 <app-exhibit-edit [exhibit]="selectedExhibit"></app-exhibit-edit>
+
+<button (click)="save()">save</button>
+<button (click)="goBack()">go back</button>

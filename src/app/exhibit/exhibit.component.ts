@@ -30,26 +30,20 @@ export class ExhibitComponent implements OnInit {
   }
   getTourExhibits(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.tourService.log(`Current exhibits = ${this.exhibits}` + `Before call tour = ${this.tour}`)
+    //this.tourService.log(`Current exhibits = ${this.exhibits}` + `Before call tour = ${this.tour}`)
     
-    this.tourService.getTour(id).subscribe(tour => {this.exhibits = tour.exhibits;}, error => console.log(`Couldnt load exhibits`));
+    this.tourService.getTour(id).subscribe(tour => {this.exhibits = tour.exhibits; this.tour = tour;}, error => console.log(`Couldnt load exhibits`));
 
-    this.tourService.log(`After call exhibits = ${this.exhibits}` + `After call tour = ${this.tour}`)
+    //this.tourService.log(`After call exhibits = ${this.exhibits}` + `After call tour = ${this.tour}`)
   }
 
-
-  // getExhibits(): void {
-  //   //this.tour.getExhibits()
-  //   const id = +this.route.snapshot.paramMap.get('id');
-  //   this.tourService.getTour(id).subscribe(tour => this.tour = tour);
-  // }
 
   goBack(): void {
     this.location.back();
   }
-  // save(): void {
-  //   this.tourService.updateTour(this.tour)
-  //     .subscribe(() => this.goBack());
-  // }
+  save(): void {
+    this.tourService.updateTour(this.tour)
+      .subscribe(() => this.goBack());
+  }
 
 }
