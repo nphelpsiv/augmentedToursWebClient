@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Tour } from './tours/tour';
 //import { TOURS } from './mock-tours';
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of'
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,7 +14,7 @@ const httpOptions = {
 
 @Injectable()
 export class TourService {
-
+  tour: Tour[]
   constructor(
     private messageService: MessageService,
     private http: HttpClient) { }
@@ -29,67 +29,75 @@ export class TourService {
   getTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(this.toursUrl)
       .pipe(
-        tap(tours => this.log(`fetched tours`)),
-        catchError(this.handleError('getTours', []))
+        tap(tours => {this.log(`fetched tours`); console.log(tours); this.tour = tours}),
+        catchError(this.handleError('getTours', [])),
       );
   }
-  getExhibits (): Observable<Exhibit[]> {
-    return this.http.get<Exhibit[]>(this.exhibitsUrl)
-      .pipe(
-        tap(exhibits => this.log(`fetched exhibit`)),
-        catchError(this.handleError('getExhibit', []))
-      );
-  }
-  /** GET tour by id. Will 404 if id not found */
-  getTour(id: number): Observable<Tour> {
-    const url = `${this.toursUrl}/${id}`;
-    return this.http.get<Tour>(url).pipe(
-      tap(_ => this.log(`fetched tour id=${id}`)),
-      catchError(this.handleError<Tour>(`getTour id=${id}`))
-    );
+  getExhibits(_id: string): Exhibit[] 
+  {
+    if(this.tour != null)
+    {
+      for (let singleTour of this.tour)
+      {
+        if(singleTour._id = _id)
+        {
+          return singleTour.exhibits
+        }
+        else
+        {
+           return null;
+        }
+      }
+    }
+    else{
+      return null;
+    }
+    
+ 
   }
 
-  getExhibit(id: number): Observable<Exhibit> {
-    const url = `${this.exhibitsUrl}/${id}`;
-    return this.http.get<Exhibit>(url).pipe(
-      tap(_ => this.log(`fetched exhibit id=${id}`)),
-      catchError(this.handleError<Exhibit>(`getExhibit id=${id}`))
+  /** GET tour by id. Will 404 if id not found */
+  getTour(_id: string): Observable<Tour> {
+    const url = `${this.toursUrl}${_id}`;
+    return this.http.get<Tour>(url).pipe(
+      tap(_ => this.log(`fetched tour _id=${_id}`)),
+      catchError(this.handleError<Tour>(`getTour _id=${_id}`))
     );
   }
     /** PUT: update the tour on the server */
   updateTour (tour: Tour): Observable<any> {
-    return this.http.put(this.toursUrl, tour, httpOptions).pipe(
-      tap(_ => this.log(`updated tour id=${tour.id}`)),
+    return this.http.put(this.toursUrl + tour.tourID, tour, httpOptions).pipe(
+      tap(_ => this.log(`updated tour id=${tour.tourID}`)),
       catchError(this.handleError<any>('updateTour'))
     );
   }
   /** POST: add a new tour to the server */
-  addTour (tour: Tour): Observable<Tour> {
-    return this.http.post<Tour>(this.toursUrl, tour, httpOptions).pipe(
-      tap((tour: Tour) => this.log(`added tour w/ id=${tour.id}`)),
-      catchError(this.handleError<Tour>('addTour'))
-    );
-  }
+  // addTour (tour: Tour): Observable<Tour> {
+  //   return this.http.post<Tour>(this.toursUrl, tour, httpOptions).pipe(
+  //     tap((tour: Tour) => this.log(`added tour w/ id=${tour._id}`)),
+  //     catchError(this.handleError<Tour>('addTour'))
+  //   );
+  // }
   /** DELETE: delete the tour from the server */
-  deleteTour (tour: Tour | number): Observable<Tour> {
-    const id = typeof tour === 'number' ? tour : tour.id;
-    const url = `${this.toursUrl}/${id}`;
+  // deleteTour (tour: Tour | number): Observable<Tour> {
+  //   const _id = typeof tour === 'number' ? tour : tour._id;
+  //   const url = `${this.toursUrl}/${_id}`;
 
-    return this.http.delete<Tour>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted tour id=${id}`)),
-      catchError(this.handleError<Tour>('deleteTour'))
-    );
-  }
+  //   return this.http.delete<Tour>(url, httpOptions).pipe(
+  //     tap(_ => this.log(`deleted tour id=${_id}`)),
+  //     catchError(this.handleError<Tour>('deleteTour'))
+  //   );
+  // }
   /** DELETE: delete the exhibit from the server */
-  deleteExhibit (exhibit: Exhibit | number): Observable<Exhibit> {
-    const id = typeof exhibit === 'number' ? exhibit : exhibit.id;
-    const url = `${this.exhibitsUrl}/${id}`;
+  // deleteExhibit (exhibit: Exhibit | number): Observable<Exhibit> {
+  //   const id = typeof exhibit === 'number' ? exhibit : exhibit.id;
+  //   const url = `${this.exhibitsUrl}/${id}`;
 
-    return this.http.delete<Exhibit>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted exhibit id=${id}`)),
-      catchError(this.handleError<Exhibit>('deleteExhibit'))
-    );
-  }
+  //   return this.http.delete<Exhibit>(url, httpOptions).pipe(
+  //     tap(_ => this.log(`deleted exhibit id=${id}`)),
+  //     catchError(this.handleError<Exhibit>('deleteExhibit'))
+  //   );
+  // }
   /* GET tours whose name contains search term */
   searchTours(term: string): Observable<Tour[]> {
     if (!term.trim()) {
@@ -101,6 +109,7 @@ export class TourService {
       catchError(this.handleError<Tour[]>('searchTours', []))
     );
   }
+  
   // getHero(id: number): Observable<Tour> {
   //   // Todo: send the message _after_ fetching the tour
   //   this.messageService.add(`TOurService: fetched tour id=${id}`);
@@ -111,8 +120,8 @@ export class TourService {
     this.messageService.add('TourService: ' + message);
   }
 
-  private toursUrl = 'api/tours';  // URL to web api
-  private exhibitsUrl = 'api/exhibits';
+  //private toursUrl = 'api/tours';  // URL to web api
+  private toursUrl = 'http://ec2-34-238-135-141.compute-1.amazonaws.com:8080/tours/'
   /**
  * Handle Http operation that failed.
  * Let the app continue.

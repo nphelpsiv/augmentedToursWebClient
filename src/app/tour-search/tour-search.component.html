@@ -5,8 +5,8 @@
   
     <ul class="search-result">
       <li *ngFor="let tour of tours$ | async" >
-        <a routerLink="/detail/{{tour.id}}">
-          {{tour.name}}
+        <a routerLink="/detail/{{tour._id}}">
+          {{tour.tourName}}
         </a>
       </li>
     </ul>

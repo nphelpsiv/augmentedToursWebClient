@@ -21,10 +21,11 @@
 
 <ul class="tours">
   <li *ngFor="let tour of tours">
-    <a routerLink="/detail/{{tour.id}}">
-      <span class="badge">{{tour.id}}</span> {{tour.name}}
+    <a routerLink="/detail/{{tour.tourID}}">
+      <span class="badge">{{tour.tourName}}</span>Created by:  {{tour.tourName}}
     </a>
     <button class="delete" title="delete tour"
     (click)="delete(tour)">x</button>
   </li>
 </ul>
+<!--<a [routerLink]="['/team', projectID, {projectTeam: true}]">Teampage</a> -->

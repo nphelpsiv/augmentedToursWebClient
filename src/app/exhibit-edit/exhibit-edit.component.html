@@ -1,16 +1,16 @@
 <h2></h2><div *ngIf="exhibit">
   
-  <h2>{{ exhibit._name | uppercase }}</h2>
-  <div><span>id: </span>{{exhibit.id}}</div>
-  <div><span>AR Text: </span>{{exhibit._text}}</div>
+  <h2>{{ exhibit.name | uppercase }}</h2>
+  <div><span>id: </span>{{exhibit._id}}</div>
+  <div><span>AR Text: </span>{{exhibit.arText}}</div>
   <div>
     <label>rename exhibit:
-      <input [(ngModel)]="exhibit._name" placeholder="name"/>
+      <input [(ngModel)]="exhibit.name" placeholder="name"/>
     </label>
   </div>
   <div>
     <label>Add/Edit AR Text :
-      <input [(ngModel)]="exhibit._text" placeholder="ARText"/>
+      <input [(ngModel)]="exhibit.arText" placeholder="ARText"/>
     </label>
   </div>
 </div>

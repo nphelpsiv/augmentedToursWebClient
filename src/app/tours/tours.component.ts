@@ -27,10 +27,13 @@ export class ToursComponent implements OnInit {
   ngOnInit() {
     this.getTours()
   }
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.tourService.addTour({ name } as Tour)
+  onSelect(tour: Tour): void {
+    this.selectedTour = tour;
+  }
+  add(tourName: string): void {
+    tourName = tourName.trim();
+    if (!tourName) { return; }
+    this.tourService.addTour({ tourName } as Tour)
       .subscribe(tour => {
         this.tours.push(tour);
       });

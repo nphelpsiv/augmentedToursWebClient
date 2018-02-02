@@ -1,12 +1,12 @@
-<h2>{{ tour.name | uppercase }}'s exhibits</h2>
+<h2>{{ tour.tourName | uppercase }}'s exhibits</h2>
 
 <div *ngIf="exhibits">
   <ul class="exhibits">
     <li *ngFor="let exhibit of exhibits"
     [class.selected]="exhibit === selectedExhibit"
     (click)="onSelect(exhibit)">
-      <a routerLink="/detail/{{exhibit.id}}">
-        <span class="badge">{{exhibit.id}}</span> {{exhibit._name}}
+      <a routerLink="/detail/{{exhibit._id}}">
+        <span class="badge">{{exhibit.name}}</span> {{exhibit.name}}
       </a>
       <button class="delete" title="delete exhibit"
       (click)="delete(exhibit)">x</button>
