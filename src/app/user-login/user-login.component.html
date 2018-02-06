@@ -1,14 +1,16 @@
-<h1>{{title}}</h1>
+<!--<h1>{{title}}</h1>-->
 <h2>User Login:</h2>
-<div>
-  <label>Username:
-    <input [(ngModel)]="username" placeholder="username"/>
-  </label>
-</div>
-<div>
-  <label>Password:
-    <input [(ngModel)]="password" placeholder="password"/>
-  </label>
+<div class="col-md-2 col-md-offset-3">
+  <div>
+    <label>Username:
+      <input [(ngModel)]="username"/>
+    </label>
+  </div>
+  <div>
+    <label>Password:
+      <input [(ngModel)]= "password"/>
+    </label>
+  </div>
 </div>
 
 <button (click)="attemptLogin(username, password)">Login</button>

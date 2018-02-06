@@ -10,7 +10,9 @@ import { subscribeOn } from 'rxjs/operator/subscribeOn';
 })
 export class UserLoginComponent implements OnInit {
   //@Input() 
-  user: User
+  //user: User;
+  username: string;
+  password: string;
   success: Boolean = false;
 
   constructor(private tourService: TourService, private route: ActivatedRoute,
@@ -20,15 +22,17 @@ export class UserLoginComponent implements OnInit {
   }
 
   attemptLogin(username: string, password: string): void{
-    username = username.trim();
-    password = password.trim();
+    this.username = username.trim();
+    this.password = password.trim();
     if (!username || !password) { return; }
     var user: User = {
-      username: username,
-      password: password
+      username: this.username,
+      password: this.password
 
     };
-    this.tourService.userLogin(user).subscribe(data => {console.log(data); if(data){this.success = true};});
+    this.tourService.userLogin(user).subscribe(data => {let parse = JSON.parse(JSON.stringify(data));  console.log("Data: " + parse.message);
+        if(parse.message == "Login Successful"){this.success = true};}
+    );
     if(this.success)
     {
       this.router.navigate(['tours/' + username])

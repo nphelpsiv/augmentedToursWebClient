@@ -13,22 +13,21 @@
     <a routerLink="/dashboard">Dashboard</a>
 </nav>
 <router-outlet></router-outlet>-->
-
+<!--
 <div>
   <label>Tour name:
     <input #tourName />
   </label>
-  <!-- (click) passes input value to add() and then clears the input -->
   <button (click)="add(tourName.value); tourName.value=''">
     add
   </button>
 </div>
-    
+-->   
 
 <ul class="tours">
   <li *ngFor="let tour of tours">
     <a routerLink="/detail/{{tour.tourID}}">
-      <span class="badge">{{tour.tourName}}</span>Created by:  {{tour.tourName}}
+      <span class="badge">{{tour.tourName}}</span>Author: {{tour.tourName}}
     </a>
     <button class="delete" title="delete tour"
     (click)="delete(tour)">x</button>
