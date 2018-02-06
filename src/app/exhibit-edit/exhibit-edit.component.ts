@@ -24,13 +24,5 @@ export class ExhibitEditComponent implements OnInit {
   // getExhibits(): void {
   //   const id = +this.route.snapshot.paramMap.get('id');
   //   this.tourService.getExhibit(id).subscribe(exhibit => this.exhibit = exhibit);
-  // }
-  goBack(): void {
-    this.location.back();
-  }
-  // save(): void {
-  //   this.tourService.updateTour(this.tour)
-  //     .subscribe(() => this.goBack());
-  // }
 
 }

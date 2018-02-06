@@ -8,7 +8,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 const routes: Routes = [
   {path: 'tours', component: ToursComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: '', redirectTo: '/user-login', pathMatch: 'full'},
   {path: 'detail/:tourID', component: ExhibitComponent },
   {path: 'user-login', component: UserLoginComponent},
   {path: 'tours/:username', component: ToursComponent}
@@ -20,5 +20,5 @@ const routes: Routes = [
   ],
   imports: [ RouterModule.forRoot(routes) ],
   declarations: []
-})
+}) 
 export class AppRoutingModule { }

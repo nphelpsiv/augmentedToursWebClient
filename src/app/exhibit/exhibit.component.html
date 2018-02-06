@@ -6,7 +6,7 @@
     [class.selected]="exhibit === selectedExhibit"
     (click)="onSelect(exhibit)">
       <a routerLink="/detail/{{exhibit._id}}">
-        <span class="badge">{{exhibit.name}}</span> {{exhibit.name}}
+        <span class="badge">{{exhibit.name}}</span> {{tour.tourName}}
       </a>
       <button class="delete" title="delete exhibit"
       (click)="delete(exhibit)">x</button>

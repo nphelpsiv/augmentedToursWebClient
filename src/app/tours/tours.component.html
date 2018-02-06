@@ -27,7 +27,7 @@
 <ul class="tours">
   <li *ngFor="let tour of tours">
     <a routerLink="/detail/{{tour.tourID}}">
-      <span class="badge">{{tour.tourName}}</span>Author: {{tour.tourName}}
+      <span class="badge">{{tour.tourName}}</span>Author: {{tour.creatorName}}
     </a>
     <button class="delete" title="delete tour"
     (click)="delete(tour)">x</button>
