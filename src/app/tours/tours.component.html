@@ -9,6 +9,11 @@
  
 <h2>My Tours</h2>
 
+<!--<nav>
+    <a routerLink="/dashboard">Dashboard</a>
+</nav>
+<router-outlet></router-outlet>-->
+
 <div>
   <label>Tour name:
     <input #tourName />
@@ -18,6 +23,7 @@
     add
   </button>
 </div>
+    
 
 <ul class="tours">
   <li *ngFor="let tour of tours">

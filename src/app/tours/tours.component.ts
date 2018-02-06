@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tour } from './tour';
-
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { TourService } from '../tour.service';
 
 
@@ -14,7 +15,9 @@ import { TourService } from '../tour.service';
 export class ToursComponent implements OnInit {
   tours: Tour[]
 
-  constructor(private tourService: TourService) { }
+  constructor(private tourService: TourService,
+    private route: ActivatedRoute,
+    private location: Location) { }
 
   selectedTour: Tour;
   
@@ -22,7 +25,10 @@ export class ToursComponent implements OnInit {
   //   this.selectedHero = tour;
   // }
   getTours(): void {
-    this.tourService.getTours().subscribe(tours => this.tours = tours);
+    //this.tourService.getTours().subscribe(tours => this.tours = tours);
+    const username = this.route.snapshot.paramMap.get('username');
+    console.log("USername: " + username);
+    this.tourService.getUserTours(username).subscribe(tours => {this.tours = tours;}, error => console.log(`Couldnt load tours`));
   }
   ngOnInit() {
     this.getTours()
@@ -30,13 +36,13 @@ export class ToursComponent implements OnInit {
   onSelect(tour: Tour): void {
     this.selectedTour = tour;
   }
-  add(tourName: string): void {
-    tourName = tourName.trim();
-    if (!tourName) { return; }
-    this.tourService.addTour({ tourName } as Tour)
-      .subscribe(tour => {
-        this.tours.push(tour);
-      });
-  }
+  // add(tourName: string): void {
+  //   tourName = tourName.trim();
+  //   if (!tourName) { return; }
+  //   this.tourService.addTour({ tourName } as Tour)
+  //     .subscribe(tour => {
+  //       this.tours.push(tour);
+  //     });
+  // }
 
 }

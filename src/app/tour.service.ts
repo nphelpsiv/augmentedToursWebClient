@@ -7,6 +7,7 @@ import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Exhibit } from './exhibit/exhibit';
+import { User } from './user-login/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,6 +29,13 @@ export class TourService {
   /** GET tours from the server */
   getTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(this.toursUrl)
+      .pipe(
+        tap(tours => {this.log(`fetched tours`); console.log(tours); this.tour = tours}),
+        catchError(this.handleError('getTours', [])),
+      );
+  }
+  getUserTours(username: string): Observable<Tour[]> {
+    return this.http.get<Tour[]>(this.userToursUrl + username)
       .pipe(
         tap(tours => {this.log(`fetched tours`); console.log(tours); this.tour = tours}),
         catchError(this.handleError('getTours', [])),
@@ -70,6 +78,11 @@ export class TourService {
       tap(_ => this.log(`updated tour id=${tour.tourID}`)),
       catchError(this.handleError<any>('updateTour'))
     );
+  }
+  userLogin(user: User)
+  {
+    return this.http.post(this.userLoginUrl, JSON.stringify(user),
+      {headers:{'Content-Type': 'application/json'}});
   }
   /** POST: add a new tour to the server */
   // addTour (tour: Tour): Observable<Tour> {
@@ -122,6 +135,8 @@ export class TourService {
 
   //private toursUrl = 'api/tours';  // URL to web api
   private toursUrl = 'http://ec2-34-238-135-141.compute-1.amazonaws.com:8080/tours/'
+  private userLoginUrl = 'http://ec2-34-238-135-141.compute-1.amazonaws.com:8080/users/login'
+  private userToursUrl = 'http://ec2-34-238-135-141.compute-1.amazonaws.com:8080/users/'
   /**
  * Handle Http operation that failed.
  * Let the app continue.
