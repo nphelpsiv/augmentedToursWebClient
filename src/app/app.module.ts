@@ -7,9 +7,7 @@ import { AppComponent } from './app.component';
 import { ToursComponent } from './tours/tours.component';
 import { FormsModule } from '@angular/forms';
 import { ExhibitComponent } from './exhibit/exhibit.component';
-import { MessagesComponent } from './messages/messages.component';
 
-import { MessageService } from './message.service';
 import { TourService } from './tour.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -25,7 +23,6 @@ import { ExhibitEditComponent } from './exhibit-edit/exhibit-edit.component';
         AppComponent,
         ToursComponent,
         ExhibitComponent,
-        MessagesComponent,
         DashboardComponent,
         TourSearchComponent,
         UserLoginComponent,
@@ -38,7 +35,7 @@ import { ExhibitEditComponent } from './exhibit-edit/exhibit-edit.component';
         AppRoutingModule,
         NgbModule.forRoot()
     ],
-    providers: [TourService, MessageService],
+    providers: [TourService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,9 +17,5 @@ export class DashboardComponent implements OnInit {
   }
 
   getTours(): void {
-    //this.tourService.getTours().subscribe(tours => this.tours = tours.slice(1, 5));
-    // const username = this.route.snapshot.paramMap.get('username');
-    // console.log("USername: " + username);
-    // this.tourService.getUserTours(username).subscribe(tours => {this.tours = tours.slice(1, 5);}, error => console.log(`Couldnt load tours`));
   }
 }
