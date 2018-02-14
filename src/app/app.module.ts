@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -12,39 +13,32 @@ import { MessageService } from './message.service';
 import { TourService } from './tour.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryDataService } from './in-memory-data.service';
 import { TourSearchComponent } from './tour-search/tour-search.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ExhibitEditComponent } from './exhibit-edit/exhibit-edit.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ToursComponent,
-    ExhibitComponent,
-    MessagesComponent,
-    DashboardComponent,
-    TourSearchComponent,
-    UserLoginComponent,
-    ExhibitEditComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    
-    
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { dataEncapsulation: false }
-    // )
-  ],
-  providers: [ TourService, MessageService ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ToursComponent,
+        ExhibitComponent,
+        MessagesComponent,
+        DashboardComponent,
+        TourSearchComponent,
+        UserLoginComponent,
+        ExhibitEditComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        NgbModule.forRoot()
+    ],
+    providers: [TourService, MessageService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
