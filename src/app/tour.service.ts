@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Tour } from './tours/tour';
 import { Observable } from 'rxjs';
-import { of } from 'rxjs/observable/of'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Exhibit } from './exhibit/exhibit';
@@ -56,9 +55,9 @@ export class TourService {
     searchTours(term: string): Observable<Tour[]> {
         if (!term.trim()) {
             // if not search term, return empty tour array.
-            return of([]);
+            return Observable.of([]);
         }
-        return this.http.get<Tour[]>(`api/tours/?name=${term}`).pipe(
+        return this.http.get<Tour[]>(this.toursUrl + `?name=${term}`).pipe(
             catchError(this.handleError<Tour[]>('searchTours', []))
         );
     }
@@ -79,7 +78,7 @@ export class TourService {
             // TODO: send the error to remote logging infrastructure
             console.error(error); // log to console instead
             // Let the app keep running by returning an empty result.
-            return of(result as T);
+            return Observable.of(result as T);
         };
     }
 }
